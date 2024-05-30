@@ -8,14 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Function to reset local storage
     function resetLocalStorage() {
         localStorage.removeItem('round');
         localStorage.removeItem('pairsHistory');
         console.log('Local storage reset.');
     }
 
-    // Uncomment this line for debugging purposes if needed
     // resetLocalStorage();
 
     console.log('Elements found. Initializing...');
@@ -52,15 +50,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Generated pairs:', pairs);
 
-        pairs.forEach(pair => {
+        pairs.forEach((pair, index) => {
             console.log(`Pair: ${pair[0]} and ${pair[1]}`);
-            const pairElement = document.createElement('div');
-            pairElement.className = 'pair';
-            pairElement.textContent = `${pair[0]} and ${pair[1]}`;
-            pairsContainer.appendChild(pairElement);
+            const teamElement = document.createElement('div');
+            teamElement.className = `pair team-${index + 1}`;
+
+            const titleElement = document.createElement('div');
+            titleElement.className = 'team-title';
+            titleElement.textContent = `Team ${index + 1}`;
+
+            const countElement = document.createElement('div');
+            countElement.className = 'team-count';
+            countElement.textContent = pair.length;
+
+            teamElement.appendChild(titleElement);
+            pair.forEach(member => {
+                const memberElement = document.createElement('div');
+                memberElement.className = 'team-member';
+                memberElement.textContent = member;
+                teamElement.appendChild(memberElement);
+            });
+
+            teamElement.appendChild(countElement);
+            pairsContainer.appendChild(teamElement);
         });
 
-        // Save the current round and pairs history to local storage
         localStorage.setItem('round', round);
         pairsHistory.push(pairs);
         localStorage.setItem('pairsHistory', JSON.stringify(pairsHistory));
@@ -68,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Updated pairs history:', pairsHistory);
 
         roundCounter.textContent = `Round: ${round}`;
-
     }
 
     function getRoundRobinPairs(arr, round) {
@@ -80,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Original array:', arr);
         console.log('Rotated array before rotation:', rotatedArr);
 
-        // Rotate array based on the current round
         const rotate = rotatedArr.splice(1, round);
         rotatedArr.push(...rotate);
 
@@ -94,20 +106,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return pairs;
     }
+
     function displayPreviousPairs() {
         console.log('Displaying previous pairs...');
-        const lastRoundPairs = pairsHistory[pairsHistory.length - 1];
-        if (lastRoundPairs) {
-            lastRoundPairs.forEach(pair => {
-                const pairElement = document.createElement('div');
-                pairElement.className = 'pair';
-                pairElement.textContent = `${pair[0]} and ${pair[1]}`;
-                pairsContainer.appendChild(pairElement);
-            });
+        const lastPairs = pairsHistory[pairsHistory.length - 1];
+
+        if (!lastPairs) {
+            console.log('No previous pairs to display.');
+            return;
         }
+
+        lastPairs.forEach((pair, index) => {
+            const teamElement = document.createElement('div');
+            teamElement.className = `pair team-${index + 1}`;
+
+            const titleElement = document.createElement('div');
+            titleElement.className = 'team-title';
+            titleElement.textContent = `Team ${index + 1}`;
+
+            const countElement = document.createElement('div');
+            countElement.className = 'team-count';
+            countElement.textContent = pair.length;
+
+            teamElement.appendChild(titleElement);
+            pair.forEach(member => {
+                const memberElement = document.createElement('div');
+                memberElement.className = 'team-member';
+                memberElement.textContent = member;
+                teamElement.appendChild(memberElement);
+            });
+
+            teamElement.appendChild(countElement);
+            pairsContainer.appendChild(teamElement);
+        });
     }
 
-    // Display previously generated pairs on page load
     displayPreviousPairs();
     roundCounter.textContent = `Round: ${round}`;
 });

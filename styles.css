@@ -9,10 +9,11 @@ body {
     align-items: center;
     height: 100vh;
     padding: 20px;
+    margin: 0;
 }
 
 .container {
-    max-width: 700px;
+    max-width: 900px;
     width: 100%;
     padding: 30px;
     background: #fff;
@@ -51,41 +52,81 @@ button:active {
 
 .pairs-container {
     margin-top: 30px;
-    text-align: center; /* Center the pair boxes horizontally */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
 }
 
+/* Individual team box */
 .pair {
     background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
+    text-align: center;
+    width: 150px;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* Add white background box for team titles */
+.team-title-box {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 5px 10px;
     border-radius: 5px;
-    font-family: 'Courier New', monospace;
-    font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    display: inline-block; /* Display each pair in a separate box */
-    margin-right: 10px; /* Add margin between pairs */
 }
 
-.pair:hover {
-    transform: scale(1.02);
-}
-
-.pair:nth-child(odd) {
-    background-color: #e3e3e3;
-}
-
-/* Make pair names bold */
-.pair {
+/* Team title */
+.pair .team-title {
+    font-size: 18px;
     font-weight: bold;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Add padding to the pair */
-.pair {
-    padding: 10px 20px;
+/* Team member */
+.pair .team-member {
+    font-size: 14px;
+    margin: 5px 0;
+    font-weight: normal;
 }
 
+/* Circle with number of members */
+.pair .team-count {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Team specific styles */
+.team-1 { background-color: #2e7d32; color: white; }
+.team-2 { background-color: #f9a825; color: black; }
+.team-3 { background-color: #cddc39; color: black; }
+.team-4 { background-color: #ffeb3b; color: black; }
+.team-5 { background-color: #8e24aa; color: white; }
+.team-6 { background-color: #039be5; color: white; }
+.team-7 { background-color: #fb8c00; color: white; }
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
         padding: 20px;
@@ -98,5 +139,6 @@ button:active {
 
     .pair {
         font-size: 14px;
+        width: 100%;
     }
 }
