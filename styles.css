@@ -89,6 +89,7 @@ button:active {
     margin-bottom: 10px;
     position: relative;
     z-index: 1;
+
 }
 
 /* Team member */
@@ -96,6 +97,9 @@ button:active {
     font-size: 14px;
     margin: 5px 0;
     font-weight: normal;
+    background-color: white; /* Add white background */
+    padding: 5px 10px; /* Add padding to create space around the text */
+    border-radius: 5px;
 }
 
 /* Circle with number of members */
@@ -118,13 +122,13 @@ button:active {
 }
 
 /* Team specific styles */
-.team-1 { background-color: #2e7d32; color: white; }
+.team-1 { background-color: #2e7d32; color: black; }
 .team-2 { background-color: #f9a825; color: black; }
 .team-3 { background-color: #cddc39; color: black; }
 .team-4 { background-color: #ffeb3b; color: black; }
-.team-5 { background-color: #8e24aa; color: white; }
-.team-6 { background-color: #039be5; color: white; }
-.team-7 { background-color: #fb8c00; color: white; }
+.team-5 { background-color: #8e24aa; color: black; }
+.team-6 { background-color: #039be5; color: black; }
+.team-7 { background-color: #fb8c00; color: black; }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
