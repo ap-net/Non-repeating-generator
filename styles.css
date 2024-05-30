@@ -58,12 +58,11 @@ button:active {
     justify-content: center;
 }
 
-/* Individual team box */
 .pair {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
     text-align: center;
     width: 150px;
     position: relative;
@@ -71,7 +70,6 @@ button:active {
     color: #333;
 }
 
-/* Add white background box for team titles */
 .team-title-box {
     position: absolute;
     top: -20px;
@@ -82,7 +80,6 @@ button:active {
     border-radius: 5px;
 }
 
-/* Team title */
 .pair .team-title {
     font-size: 18px;
     font-weight: bold;
@@ -92,17 +89,15 @@ button:active {
 
 }
 
-/* Team member */
 .pair .team-member {
     font-size: 14px;
     margin: 5px 0;
     font-weight: normal;
-    background-color: white; /* Add white background */
-    padding: 5px 10px; /* Add padding to create space around the text */
+    background-color: white; 
+    padding: 5px 10px; 
     border-radius: 5px;
 }
 
-/* Circle with number of members */
 .pair .team-count {
     position: absolute;
     top: 10px;
@@ -121,7 +116,6 @@ button:active {
 
 }
 
-/* Team specific styles */
 .team-1 { background-color: #2e7d32; color: black; }
 .team-2 { background-color: #f9a825; color: black; }
 .team-3 { background-color: #cddc39; color: black; }
@@ -130,7 +124,6 @@ button:active {
 .team-6 { background-color: #039be5; color: black; }
 .team-7 { background-color: #fb8c00; color: black; }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
         padding: 20px;
