@@ -1,35 +1,72 @@
 document.addEventListener('DOMContentLoaded', () => {
     const generateButton = document.getElementById('generate-button');
+    const addUserButton = document.getElementById('add-user-button');
+    const deleteUserButton = document.getElementById('delete-user-button');
+    const userInput = document.getElementById('user-input');
+    const userList = document.getElementById('user-list');
     const pairsContainer = document.getElementById('pairs-container');
-    const roundCounter = document.getElementById('round-counter');
+    const weekCounter = document.getElementById('week-counter');
 
-    if (!generateButton || !pairsContainer) {
+    if (!generateButton || !pairsContainer || !addUserButton || !deleteUserButton || !userInput || !userList) {
         console.error('Required elements are missing in the DOM.');
         return;
     }
 
     function resetLocalStorage() {
-        localStorage.removeItem('round');
+        localStorage.removeItem('week');
         localStorage.removeItem('pairsHistory');
+        localStorage.removeItem('people');
         console.log('Local storage reset.');
     }
 
-    // resetLocalStorage();
-
     console.log('Elements found. Initializing...');
-    const people = [
+    const defaultPeople = [
         'Carolina', 'Nitzan', 'Yishay', 'Vera', 'Gedi', 'Dana', 'Beatriz', 'Angelo',
         'Alicja', 'Enzo', 'Dorota', 'Yulia', 'Adrian', 'Aneta'
     ];
 
-    let round = parseInt(localStorage.getItem('round'));
-    if (isNaN(round)) {
-        round = 1;
+    let people = JSON.parse(localStorage.getItem('people')) || defaultPeople;
+
+    function updateUserList() {
+        userList.innerHTML = '';
+        people.forEach(person => {
+            const userElement = document.createElement('div');
+            userElement.textContent = person;
+            userList.appendChild(userElement);
+        });
     }
-    console.log('Initial round:', round);
+
+    updateUserList();
+
+    let week = parseInt(localStorage.getItem('week'));
+    if (isNaN(week)) {
+        week = 1;
+    }
+    console.log('Initial week:', week);
 
     const pairsHistory = JSON.parse(localStorage.getItem('pairsHistory')) || [];
     console.log('Initial pairs history:', pairsHistory);
+
+    addUserButton.addEventListener('click', () => {
+        const newUser = userInput.value.trim();
+        if (newUser && !people.includes(newUser)) {
+            people.push(newUser);
+            localStorage.setItem('people', JSON.stringify(people));
+            updateUserList();
+            userInput.value = '';
+        }
+    });
+
+    deleteUserButton.addEventListener('click', () => {
+        const userToDelete = userInput.value.trim();
+        const index = people.indexOf(userToDelete);
+        if (index !== -1) {
+            people.splice(index, 1);
+            localStorage.setItem('people', JSON.stringify(people));
+            updateUserList();
+            userInput.value = '';
+        }
+    });
 
     generateButton.addEventListener('click', () => {
         console.log('Generate button clicked.');
@@ -40,8 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Generating pairs...');
         pairsContainer.innerHTML = '';
 
-        const pairs = getRoundRobinPairs(people, round);
-        round = round % (people.length - 1) + 1;
+        if (week > (people.length - 1)) {
+            alert('All pairs have been used. Restarting from the beginning.');
+            week = 1;
+            pairsHistory.length = 0; 
+        }
+
+        const pairs = getRoundRobinPairs(people, week);
+        week = week % (people.length - 1) + 1;
 
         if (!pairs || pairs.length === 0) {
             console.error('No pairs generated.');
@@ -51,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Generated pairs:', pairs);
 
         pairs.forEach((pair, index) => {
-            console.log(`Pair: ${pair[0]} and ${pair[1]}`);
+            console.log(`Pair: ${pair.join(', ')}`);
             const teamElement = document.createElement('div');
             teamElement.className = `pair team-${index + 1}`;
 
@@ -75,17 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
             pairsContainer.appendChild(teamElement);
         });
 
-        localStorage.setItem('round', round);
+        localStorage.setItem('week', week);
         pairsHistory.push(pairs);
         localStorage.setItem('pairsHistory', JSON.stringify(pairsHistory));
-        console.log('Updated round:', round);
+        console.log('Updated week:', week);
         console.log('Updated pairs history:', pairsHistory);
 
-        roundCounter.textContent = `Round: ${round}`;
+        weekCounter.textContent = `Week: ${week}`;
     }
 
-    function getRoundRobinPairs(arr, round) {
-        console.log('Generating round-robin pairs with round:', round);
+    function getRoundRobinPairs(arr, week) {
+        console.log('Generating round-robin pairs with week:', week);
         const n = arr.length;
         const pairs = [];
         const rotatedArr = arr.slice();
@@ -93,13 +136,19 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Original array:', arr);
         console.log('Rotated array before rotation:', rotatedArr);
 
-        const rotate = rotatedArr.splice(1, round);
-        rotatedArr.push(...rotate);
+        for (let i = 0; i < week - 1; i++) {
+            rotatedArr.push(rotatedArr.splice(1, 1)[0]);
+        }
 
         console.log('Rotated array after rotation:', rotatedArr);
 
-        for (let i = 0; i < n / 2; i++) {
+        for (let i = 0; i < Math.floor(n / 2); i++) {
             pairs.push([rotatedArr[i], rotatedArr[n - 1 - i]]);
+        }
+
+        if (n % 2 !== 0) {
+            const lastPair = pairs.pop();
+            pairs.push([lastPair[0], lastPair[1], rotatedArr[Math.floor(n / 2)]]);
         }
 
         console.log('Generated pairs:', pairs);
@@ -142,5 +191,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     displayPreviousPairs();
-    roundCounter.textContent = `Round: ${round}`;
+    weekCounter.textContent = `Week: ${week}`;
 });

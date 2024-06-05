@@ -1,4 +1,3 @@
-/* Global styles */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -13,7 +12,8 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    display: flex;
+    max-width: 1200px;
     width: 100%;
     padding: 30px;
     background: #fff;
@@ -22,15 +22,82 @@ body {
     text-align: center;
 }
 
-h1 {
+.user-management, .pair-generator {
+    flex: 1;
+    margin: 0 15px;
+}
+
+.user-management {
+    border-right: 2px solid #ccc;
+    padding-right: 15px;
+}
+
+.user-management h1, .pair-generator h1 {
     margin-bottom: 20px;
-    font-size: 32px;
+    font-size: 24px;
     color: #333;
     font-family: 'Helvetica Neue', sans-serif;
 }
 
-button {
+.user-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#user-input {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.user-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-buttons button {
     background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+}
+
+.user-buttons button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.user-buttons button:active {
+    transform: scale(0.95);
+}
+
+.user-list {
+    text-align: left;
+}
+
+.user-list div {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+#generate-button {
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -41,12 +108,12 @@ button {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-    background-color: #0056b3;
+#generate-button:hover {
+    background-color: #218838;
     transform: scale(1.05);
 }
 
-button:active {
+#generate-button:active {
     transform: scale(0.95);
 }
 
@@ -70,23 +137,10 @@ button:active {
     color: #333;
 }
 
-.team-title-box {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
 .pair .team-title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
-    position: relative;
-    z-index: 1;
-
 }
 
 .pair .team-member {
@@ -113,7 +167,6 @@ button:active {
     font-size: 12px;
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .team-1 { background-color: #2e7d32; color: black; }
@@ -126,12 +179,23 @@ button:active {
 
 @media (max-width: 768px) {
     .container {
+        flex-direction: column;
         padding: 20px;
     }
 
-    button {
-        width: 100%;
-        font-size: 18px;
+    .user-management, .pair-generator {
+        border-right: none;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .user-buttons {
+        flex-direction: row;
+    }
+
+    .user-buttons button {
+        margin-bottom: 0;
+        margin-right: 5px;
     }
 
     .pair {
