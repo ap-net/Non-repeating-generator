@@ -23,7 +23,19 @@
         </div>
     </nav>
     <div class="container">
+        <div class="user-management">
+            <h1>Manage Users</h1>
+            <div class="user-input-container">
+                <input id="user-input" type="text" placeholder="Enter name">
+                <div class="user-buttons">
+                    <button id="add-user-button">Add User</button>
+                    <button id="delete-user-button">Delete User</button>
+                </div>
+            </div>
+            <div id="user-list" class="user-list"></div>
+        </div>
         <div class="pair-generator">
+            <h1>Non-repeating Pairs Generator</h1>
             <button id="generate-button">Generate Pairs</button>
             <div id="week-counter" class="week-counter"></div>
             <div id="pairs-container" class="pairs-container"></div>
