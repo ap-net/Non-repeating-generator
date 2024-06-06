@@ -4,29 +4,65 @@ body {
     line-height: 1.6;
     background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
+    padding: 0; 
     margin: 0;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff; 
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.manage-users-button {
+    background-color: #74ebd5; 
+    color: #333;
+    border: 2px solid #74ebd5; 
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.manage-users-button:hover {
+    background-color: #ACB6E5; 
+    color: #ffffff;
+    border-color: #ACB6E5;
+}
+
+.manage-users-container {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease-out;
+}
+
+.manage-users-container.open {
+    height: 500px; 
 }
 
 .container {
     max-width: 900px;
     width: 100%;
+    margin: 0 auto; 
     padding: 30px;
     background: #fff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     text-align: center;
-}
-
-h1 {
-    margin-bottom: 20px;
-    font-size: 32px;
-    color: #333;
-    font-family: 'Helvetica Neue', sans-serif;
 }
 
 button {
@@ -86,7 +122,6 @@ button:active {
     margin-bottom: 10px;
     position: relative;
     z-index: 1;
-
 }
 
 .pair .team-member {
@@ -113,7 +148,6 @@ button:active {
     font-size: 12px;
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .team-1 { background-color: #2e7d32; color: black; }
