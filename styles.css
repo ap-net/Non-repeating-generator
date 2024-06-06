@@ -1,146 +1,110 @@
+/* Global styles */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
     color: #333;
-    padding: 0; 
+    padding: 0;
     margin: 0;
 }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #ffffff; 
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    text-align: center;
-    margin-bottom: 5%;
-}
-
-.navbar-container {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-
 .manage-users-button {
-    background-color: #74ebd5; 
+    background-color: #74ebd5;
     color: #333;
-    border: 2px solid #74ebd5; 
+    border: 2px solid #74ebd5;
     padding: 8px 16px;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
 }
 
 .manage-users-button:hover {
-    background-color: #ACB6E5; 
+    background-color: #ACB6E5;
     color: #ffffff;
     border-color: #ACB6E5;
 }
 
 .manage-users-container {
-    height: 0;
-    overflow: hidden;
-    transition: height 0.5s ease-out;
+    width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    min-height: 50vh;
 }
 
 .manage-users-container.open {
-    height: 500px; 
+    display: block;
+    height: auto;
+    max-height: 70vh; 
+}
+
+
+.user-input-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#user-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-buttons button {
+    width: 48%;
+}
+
+#user-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background: #f9f9f9;
+    width: calc(100% - 20px);
+
+}
+
+#user-list div {
+    margin-bottom: 5px;
 }
 
 .container {
-    display: flex;
-    max-width: 1200px;
+    max-width: 900px;
     width: 100%;
-    margin: 0 auto; 
+    margin: 100px auto 0 auto; 
     padding: 30px;
     background: #fff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     text-align: center;
+    position: relative;
 }
 
-.user-management, .pair-generator {
-    flex: 1;
-    margin: 0 15px;
-}
-
-.user-management {
-    border-right: 2px solid #ccc;
-    padding-right: 15px;
-}
-
-.user-management h1, .pair-generator h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-    font-family: 'Helvetica Neue', sans-serif;
-}
-
-.user-input-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-#user-input {
-    width: 200px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.user-buttons {
-    display: flex;
-    flex-direction: column;
-}
-
-.user-buttons button {
+button {
     background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 5px;
-}
-
-.user-buttons button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-.user-buttons button:active {
-    transform: scale(0.95);
-}
-
-.user-list {
-    text-align: left;
-}
-
-.user-list div {
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #333;
-}
-
-#generate-button {
-    background-color: #28a745;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -151,12 +115,12 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#generate-button:hover {
-    background-color: #218838;
+button:hover {
+    background-color: #0056b3;
     transform: scale(1.05);
 }
 
-#generate-button:active {
+button:active {
     transform: scale(0.95);
 }
 
@@ -172,7 +136,7 @@ body {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 150px;
     position: relative;
@@ -180,18 +144,30 @@ body {
     color: #333;
 }
 
+.team-title-box {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
 .pair .team-title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 .pair .team-member {
     font-size: 14px;
     margin: 5px 0;
     font-weight: normal;
-    background-color: white; 
-    padding: 5px 10px; 
+    background-color: white;
+    padding: 5px 10px;
     border-radius: 5px;
 }
 
@@ -222,23 +198,12 @@ body {
 
 @media (max-width: 768px) {
     .container {
-        flex-direction: column;
         padding: 20px;
     }
 
-    .user-management, .pair-generator {
-        border-right: none;
-        padding-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .user-buttons {
-        flex-direction: row;
-    }
-
-    .user-buttons button {
-        margin-bottom: 0;
-        margin-right: 5px;
+    button {
+        width: 100%;
+        font-size: 18px;
     }
 
     .pair {

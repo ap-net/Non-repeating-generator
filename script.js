@@ -8,63 +8,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const weekCounter = document.getElementById('week-counter');
     const manageUsersButton = document.getElementById('manage-users-button');
     const manageUsersContainer = document.querySelector('.manage-users-container');
+    const peopleCounter = document.getElementById('people-counter'); 
    
     manageUsersButton.addEventListener('click', function() {
         if (manageUsersContainer.classList.contains('open')) {
-            manageUsersContainer.style.height = '0';
+            closeManageUsersContainer();
         } else {
             manageUsersContainer.style.height = manageUsersContainer.scrollHeight + 'px';
-        }
-        manageUsersContainer.classList.toggle('open');
-    });
-
-    manageUsersContainer.addEventListener('transitionend', function() {
-        if (!manageUsersContainer.classList.contains('open')) {
-            manageUsersContainer.style.height = '0';
-        } else {
-            manageUsersContainer.style.height = 'auto';
+            manageUsersContainer.classList.add('open');
         }
     });
 
-    if (!generateButton || !pairsContainer || !addUserButton || !deleteUserButton || !userInput || !userList) {
-        console.error('Required elements are missing in the DOM.');
-        return;
+    function closeManageUsersContainer() {
+        manageUsersContainer.classList.remove('open');
+        manageUsersContainer.style.height = '0';
     }
 
-    function resetLocalStorage() {
-        localStorage.removeItem('week');
-        localStorage.removeItem('pairsHistory');
-        localStorage.removeItem('people');
-        console.log('Local storage reset.');
-    }
+    document.addEventListener('click', (event) => {
+        const target = event.target;
+        const isManageUsersButton = target === manageUsersButton;
+        const isManageUsersContainer = manageUsersContainer.contains(target);
+
+        if (!isManageUsersButton && !isManageUsersContainer) {
+            closeManageUsersContainer();
+        }
+    });
 
     console.log('Elements found. Initializing...');
-    const defaultPeople = [
-        'Carolina', 'Nitzan', 'Yishay', 'Vera', 'Gedi', 'Dana', 'Beatriz', 'Angelo',
-        'Alicja', 'Enzo', 'Dorota', 'Yulia', 'Adrian', 'Aneta'
-    ];
 
-    let people = JSON.parse(localStorage.getItem('people')) || defaultPeople;
+    let people = JSON.parse(localStorage.getItem('people')) || [];
 
     function updateUserList() {
         userList.innerHTML = '';
-        people.forEach(person => {
+        people.forEach((person, index) => {
             const userElement = document.createElement('div');
-            userElement.textContent = person;
+            userElement.textContent = `${index + 1}. ${person}`;
             userList.appendChild(userElement);
         });
+        updatePeopleCounter(); 
     }
 
     updateUserList();
 
-    let week = parseInt(localStorage.getItem('week'));
-    if (isNaN(week)) {
-        week = 1;
+    function updatePeopleCounter() {
+        peopleCounter.textContent = `Total People: ${people.length}`;
     }
+
+    let week = parseInt(localStorage.getItem('week')) || 1;
     console.log('Initial week:', week);
 
     const pairsHistory = JSON.parse(localStorage.getItem('pairsHistory')) || [];
-    console.log('Initial pairs history:', pairsHistory);
 
     addUserButton.addEventListener('click', () => {
         const newUser = userInput.value.trim();
@@ -211,4 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     displayPreviousPairs();
     weekCounter.textContent = `Week: ${week}`;
+
+    updatePeopleCounter(); 
 });

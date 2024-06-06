@@ -7,25 +7,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-container">
-            <button id="manage-users-button">Manage Users</button>
-        </div>
-        <div class="manage-users-container">
-            <div class="user-input-container">
-                <input id="user-input" type="text" placeholder="Enter name">
-                <div class="user-buttons">
-                    <button id="add-user-button">Add User</button>
-                    <button id="delete-user-button">Delete User</button>
-                </div>
+    <button id="manage-users-button" class="manage-users-button">Manage Users</button>
+    <div class="manage-users-container">
+        <div class="user-input-container">
+            <input id="user-input" type="text" placeholder="Enter name">
+            <div class="user-buttons">
+                <button id="add-user-button">Add User</button>
+                <button id="delete-user-button">Delete User</button>
             </div>
-            <div id="user-list" class="user-list"></div>
         </div>
-    </nav>
+        <div id="user-list" class="user-list"></div>
+        <div id="people-counter" class="people-counter"></div> <!-- New element for people count -->
+    </div>
     <div class="container">
-        <button id="generate-button">Generate Pairs</button>
-        <div id="round-counter"></div>
-        <div id="pairs-container" class="pairs-container"></div>
+        <div class="pair-generator">
+            <button id="generate-button">Generate Pairs</button>
+            <div id="week-counter" class="week-counter"></div>
+            <div id="pairs-container" class="pairs-container"></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
