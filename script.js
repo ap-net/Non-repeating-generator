@@ -9,19 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const manageUsersButton = document.getElementById('manage-users-button');
     const manageUsersContainer = document.querySelector('.manage-users-container');
     const peopleCounter = document.getElementById('people-counter'); 
-   
+
     manageUsersButton.addEventListener('click', function() {
         if (manageUsersContainer.classList.contains('open')) {
             closeManageUsersContainer();
         } else {
-            manageUsersContainer.style.height = manageUsersContainer.scrollHeight + 'px';
+            manageUsersContainer.style.maxHeight = manageUsersContainer.scrollHeight + 'px';
             manageUsersContainer.classList.add('open');
         }
     });
 
     function closeManageUsersContainer() {
         manageUsersContainer.classList.remove('open');
-        manageUsersContainer.style.height = '0';
+        manageUsersContainer.style.maxHeight = '0';
     }
 
     document.addEventListener('click', (event) => {
