@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const manageUsersContainer = document.querySelector('.manage-users-container');
     const peopleCounter = document.getElementById('people-counter'); 
 
+
     manageUsersButton.addEventListener('click', function() {
         if (manageUsersContainer.classList.contains('open')) {
             closeManageUsersContainer();
@@ -87,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generatePairs() {
         console.log('Generating pairs...');
+        const teamPicker = document.getElementById('team-picker');
         pairsContainer.innerHTML = '';
+        pairsContainer.appendChild(teamPicker); 
 
         if (week > (people.length - 1)) {
             alert('All pairs have been used. Restarting from the beginning.');
@@ -200,10 +203,20 @@ document.addEventListener('DOMContentLoaded', () => {
             teamElement.appendChild(countElement);
             pairsContainer.appendChild(teamElement);
         });
+
+        weekCounter.textContent = `Week: ${week}`;
     }
 
     displayPreviousPairs();
-    weekCounter.textContent = `Week: ${week}`;
 
-    updatePeopleCounter(); 
+    document.getElementById('save-jpg-link').addEventListener('click', () => {
+        html2canvas(document.querySelector(".pairs-container"), {
+            backgroundColor: 'white',
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL("image/jpeg");
+            link.download = 'teams.jpg';
+            link.click();
+        });
+    });
 });

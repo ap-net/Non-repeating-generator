@@ -6,6 +6,7 @@
     <title>Non-repeating Pairs Generator</title>
     <link rel="stylesheet" href="styles.css">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
     <button id="manage-users-button" class="manage-users-button">Manage Users</button>
@@ -24,8 +25,15 @@
         <div class="pair-generator">
             <button id="generate-button">Generate Pairs</button>
             <div id="week-counter" class="week-counter"></div>
-            <div id="pairs-container" class="pairs-container"></div>
+            <div id="pairs-container" class="pairs-container">
+                <div id="team-picker" class="team-picker">
+                    <img src="images/Imapolania.png" alt="Icon" class="team-picker-icon">
+                    <span>Team picker by Adrian</span>
+                </div>
+            </div>
+
         </div>
+        <a id="save-jpg-link" href="#">Save as JPG</a>
     </div>
     <script src="script.js"></script>
 </body>

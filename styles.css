@@ -1,11 +1,13 @@
-/* Global styles */
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #ACB6E5, #74ebd5);
     color: #333;
     padding: 0;
-    margin: 0;
 }
 
 .manage-users-button {
@@ -41,15 +43,15 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     z-index: 1001;
-    min-height: 50vh;
+    min-height: 48vh;
+    overflow: auto;
+    transition: max-height 0.3s ease;
 }
 
 .manage-users-container.open {
     display: block;
-    height: auto;
     max-height: 70vh;
 }
-
 
 .user-input-container {
     display: flex;
@@ -84,17 +86,20 @@ body {
     padding: 10px;
     background: #f9f9f9;
     width: calc(100% - 20px);
-
 }
 
 #user-list div {
     margin-bottom: 5px;
 }
 
+#user-list div:nth-child(even) {
+    background-color: #f2f2f2; 
+}
+
 .container {
     max-width: 900px;
     width: 100%;
-    margin: 100px auto 0 auto;
+    margin: 100px auto 0 auto; 
     padding: 30px;
     background: #fff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -124,20 +129,46 @@ button:active {
     transform: scale(0.95);
 }
 
+.week-counter {
+    padding-top: 8px;
+}
+
 .pairs-container {
+    position: relative;
     margin-top: 30px;
+    margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
+    background-color: transparent;
+    padding:35px;
+    padding-bottom: 60px; 
+}
+
+.team-picker {
+    position: absolute;
+    justify-content: center;
+    margin-top: 17%;
+    color: grey;
+    width: 100%; 
+    text-align: center;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    z-index: 1; 
+}
+
+.team-picker-icon {
+    margin-right: 5px;
+    width: 35px; 
+    height: 35px; 
 }
 
 .pair {
     background-color: #f9f9f9;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
+    border-radius: 10px;    text-align: center;
     width: 150px;
     position: relative;
     font-family: 'Arial', sans-serif;
@@ -185,7 +216,6 @@ button:active {
     justify-content: center;
     font-size: 12px;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .team-1 { background-color: #2e7d32; color: black; }
@@ -195,6 +225,32 @@ button:active {
 .team-5 { background-color: #8e24aa; color: black; }
 .team-6 { background-color: #039be5; color: black; }
 .team-7 { background-color: #fb8c00; color: black; }
+
+#save-jpg-link {
+    position: absolute;
+    bottom: 10px; 
+    right: 20px;
+    color: blue;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding-top: 10px;
+    z-index: 1000;
+}
+
+#save-jpg-link:hover {
+    background-color:linear-gradient(to right, #ACB6E5, #74ebd5);
+    transform: scale(1.05);
+}
+
+#save-jpg-link:active {
+    transform: scale(0.95);
+}
+
+.people-counter {
+    color: white;
+    padding: 5px;
+}
 
 @media (max-width: 768px) {
     .container {
