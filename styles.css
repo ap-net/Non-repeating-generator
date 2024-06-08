@@ -148,12 +148,11 @@ button:active {
 
 .team-picker {
     position: absolute;
+    bottom: 0;
     justify-content: center;
-    margin-top: 17%;
+    margin-top: auto;
     color: grey;
-    width: 100%; 
     text-align: center;
-    padding-bottom: 10px;
     display: flex;
     align-items: center;
     z-index: 1; 

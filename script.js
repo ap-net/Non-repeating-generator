@@ -90,8 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Generating pairs...');
         const teamPicker = document.getElementById('team-picker');
         pairsContainer.innerHTML = '';
-        pairsContainer.appendChild(teamPicker); 
-
+        
         if (week > (people.length - 1)) {
             alert('All pairs have been used. Restarting from the beginning.');
             week = 1;
@@ -140,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Updated pairs history:', pairsHistory);
 
         weekCounter.textContent = `Week: ${week}`;
+        pairsContainer.appendChild(teamPicker); 
     }
 
     function getRoundRobinPairs(arr, week) {
